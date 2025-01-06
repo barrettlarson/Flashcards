@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      property="og:description"
+      content="Flashcards app made with HTML, CSS, and JavaScript"
+    />
+    <meta property="og:title" content="Flashcards App" />
+    <meta
+      property="og:keywords"
+      content="Flashcards, Flashcards app, study, quizlet, HTML, CSS, JavaScript, Barrett Larson"
+    />
+    <title>Flashcards App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create a flashcard set</h1>
+      <div class="cards">
+        <div class="card">
+          <div class="top">
+            <p>1.</p>
+            <img src="images/trash.jpg" onclick="removeCard(this)" />
+          </div>
+          <div class="bottom">
+            <textarea placeholder="Enter term" class="term" id="1"></textarea>
+            <textarea
+              placeholder="Enter definition"
+              class="definition"
+              id="1"
+            ></textarea>
+          </div>
+        </div>
+        <div class="card">
+          <div class="top">
+            <p id="num">2.</p>
+            <img src="images/trash.jpg" id="trash" onclick="removeCard(this)" />
+          </div>
+          <div class="bottom">
+            <textarea placeholder="Enter term" class="term" id="2"></textarea>
+            <textarea
+              placeholder="Enter definition"
+              class="definition"
+              id="2"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button id="add-button">Add a card</button>
+      <button class="create" id="create">Create and practice</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

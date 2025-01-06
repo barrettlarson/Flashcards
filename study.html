@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      property="og:description"
+      content="Flashcards app made with HTML, CSS, and JavaScript"
+    />
+    <meta property="og:title" content="Flashcards App" />
+    <meta
+      property="og:keywords"
+      content="Flashcards, Flashcards app, study, quizlet, HTML, CSS, JavaScript, Barrett Larson"
+    />
+    <title>Study Set</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container-2">
+      <h1>Flash Cards</h1>
+      <div class="progress">
+        <p class="percent">5%</p>
+        <p class="fraction">1 of 20</p>
+      </div>
+      <div class="flashcard">
+        <div class="content">
+          <p class="term-def">
+            What is the difference between var, let, and const?
+          </p>
+        </div>
+
+        <div class="card-bottom">
+          <button id="prev" onclick="prevCard(this)">&lt; Previous</button>
+          <button id="show" onclick="showAnswer(this)">Flip Card</button>
+          <button id="next" onclick="nextCard(this)">Next &gt;</button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

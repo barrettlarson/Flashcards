@@ -145,3 +145,15 @@ a {
     justify-content: center;
     align-items: center;
 }
+
+#return {
+    position: absolute;
+    top: 5%;
+    left: 2.5%;
+    background-color: #88CCF1;
+    border: none;
+    outline: none;
+    font-family: 'Inter';
+    cursor: pointer;
+    font-size: 2em;
+}

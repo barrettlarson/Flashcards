@@ -1,5 +1,10 @@
 let numCards = 2;
 let cardData = [];
+let index = 0;
+let flipped = false; 
+const text = document.querySelector('.term-def');
+const percent = document.querySelector('.percent');
+const fraction = document.querySelector('.fraction');
 
 function addCard(addButton) {
     numCards++;
@@ -55,10 +60,8 @@ function updateLocalStorage() {
             term: card.querySelector('.term').value || '', definition: card.querySelector('.definition').value || ''
         };
     });
-
     localStorage.setItem('numCards', numCards);
     localStorage.setItem('cardData', JSON.stringify(cardData));
-    console.log(cardData);
 }
 
 function updateCards() {
@@ -81,7 +84,6 @@ function init(percentElement, fractionElement, text) {
     if(cardData.length > 0) {
         text.textContent = `${cardData[0].term}`;
     } else {
-        console.log(`${cardData[0].term}`)
         text.textContent = "No cards available";
     }
 }
@@ -108,12 +110,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initializeCreatePage() {
     const createButton = document.querySelector('.create');
+
     if (createButton) {
         createButton.addEventListener('click', () => {
+            const cards = document.querySelectorAll('.card');
+            for(let i = 0; i < cards.length; i++) {
+                const term = cards[i].querySelector('.term').value.trim();
+                const def = cards[i].querySelector('.definition').value.trim();
+                
+                if(!term || !def) {
+                    alert("Please fill out all terms and definitions before proceeding.");
+                    return;
+                }
+            }
             constructArrays();
             localStorage.setItem('cardData', JSON.stringify(cardData));
             localStorage.setItem('numCards', cardData.length);
-            window.location.href = 'study.html'; // Move this here to ensure it's executed correctly
+            window.location.href = 'study.html'; 
         });
     }
     const addButton = document.querySelector('#add-button');
@@ -122,15 +135,9 @@ function initializeCreatePage() {
     }
 }
 
-
 function initializeStudyPage() {
-    numCards = parseInt(localStorage.getItem('numCards')) || 2;
-    cardData = JSON.parse(localStorage.getItem('cardData')) || [];
-
-    const percent = document.querySelector('.percent');
-    const fraction = document.querySelector('.fraction');
-    const text = document.querySelector('.term-def');
-    
+    numCards = parseInt(localStorage.getItem('numCards'));
+    cardData = JSON.parse(localStorage.getItem('cardData'));
     if (percent && fraction && text) {
         init(percent, fraction, text);
     } else {
@@ -138,17 +145,12 @@ function initializeStudyPage() {
     }
 }
 
-let index = 0;
-let flipped = false; 
-const text = document.querySelector('.term-def');
-
 function showAnswer(show) {
     if(flipped) {
         text.textContent = `${cardData[index].term}`;
         flipped = false; 
         return; 
     }
-    
     text.textContent = `${cardData[index].definition}`;
     flipped = true;
 }
@@ -158,6 +160,8 @@ function prevCard(prev) {
         index--;
         text.textContent = `${cardData[index].term}`;
         flipped = false; 
+        percent.textContent = `${Math.trunc(((index + 1)/numCards) * 100)}%`;
+        fraction.textContent = `${index + 1} of ${numCards}`;
     }
 }
 
@@ -166,6 +170,8 @@ function nextCard(next) {
         index++;
         text.textContent = `${cardData[index].term}`;
         flipped = false; 
+        percent.textContent = `${Math.trunc(((index + 1)/numCards) * 100)}%`;
+        fraction.textContent = `${index + 1} of ${numCards}`;
     }
 }
 
